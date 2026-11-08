@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <math.h>
 
+int task0(int count, char sym1, char sym2);
 int sum(int m, int n);
 double pow2(int exp);
 double calc(double x);
@@ -12,6 +13,21 @@ double sum_cos(int n, double x);
 int main()
 {
 	setlocale(LC_ALL, "RUS");
+
+    // задание 0
+
+    int count0;
+    char sym1, sym2;
+
+    printf("введите количество символов: ");
+    scanf("%d", &count0);
+    printf("введите первый символ: ");
+    scanf(" %c", &sym1);
+    printf("введите второй символ: ");
+    scanf(" %c", &sym2);
+
+    int total0 = task0(count0, sym1, sym2);
+    printf("\nнапечатано %d символов\n\n\n", total0);
 
 	// задание 1
 	
@@ -52,12 +68,13 @@ int main()
             break;
         }
 
-        printf("2^%2d = %1.0f", i, p);
+        printf("2^%2d = %5.0f", i, p);
 
-        if (p >= 1024) 
+        if (p >= 1024)
         {
             double K = p / 1024.0;
-            printf("\n результат: %.1lfK", K);
+
+            printf(" \nрезультат: %.1lfK", K);
         }
         
         printf("\n");
@@ -104,37 +121,74 @@ int main()
 
     printf("введите натуральное число u: ");
 
-    if (scanf("%d", &u) != 1 || n <= 0) 
+    while (1) // бесконечный цикл
     {
+        printf("введите натуральное число u: ");
+        if (scanf("%d", &u) == 1 && u > 0)
+        {
+            break;
+        }
+
         printf("u должно быть натуральным числом.\n");
 
-        return 1;
+        while (getchar() != '\n'); // очистка буфера
     }
 
-    printf("введите действительное число s: ");
-
-    if (scanf("%lf", &s) != 1)
+    while (1)
     {
-        printf("ошибка ввода x.\n");
-        return 1;
+        printf("введите действительное число s: ");
+        if (scanf("%lf", &s) == 1)
+        {
+            break;
+        }
+        printf("некорректный ввод числа.\n");
+
+        while (getchar() != '\n'); // очистка буфера
     }
 
     result = sum_cos(u, s);
-
     printf("\nрезультат вычисления суммы: %.6lf\n", result);
 
     return 0;
 }
 
-int sum(int m, int n) 
+int task0(int count, char sym1, char sym2)
+{
+    int printed = 0;
+    int half = count / 2;
+
+    printf("+");
+    printed++;
+
+    for (int i = 0; i < count; i++)
+    {
+        if (i < half) {
+            printf("%c", sym1);
+        }
+        else {
+            printf("%c", sym2);
+        }
+
+        printf("!");
+        printed += 2;
+    }
+
+    printf("+");
+    printed++;
+    printf("\n");
+
+    return printed;
+}
+
+int sum(int m, int n)
 {
     int s = 0;
-
     for (int i = m; i >= n; i--)
     {
         s += i;
-    }
 
+        printf("шаг: i=%d, текущая сумма s=%d\n", i, s);
+    }
     return s;
 }
 
