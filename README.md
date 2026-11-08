@@ -27,27 +27,48 @@ int main()
 
  printf("введите натуральное число u: ");
 
- if (scanf("%d", &u) != 1 || n <= 0) 
+ while (1) // бесконечный цикл
  {
+     printf("введите натуральное число u: ");
+     if (scanf("%d", &u) == 1 && u > 0)
+     {
+         break;
+     }
+
      printf("u должно быть натуральным числом.\n");
 
-     return 1;
+     while (getchar() != '\n'); // очистка буфера
  }
 
- printf("введите действительное число s: ");
-
- if (scanf("%lf", &s) != 1)
+ while (1)
  {
-     printf("ошибка ввода x.\n");
-     return 1;
+     printf("введите действительное число s: ");
+     if (scanf("%lf", &s) == 1)
+     {
+         break;
+     }
+     printf("некорректный ввод числа.\n");
+
+     while (getchar() != '\n'); // очистка буфера
  }
 
  result = sum_cos(u, s);
-
  printf("\nрезультат вычисления суммы: %.6lf\n", result);
 
  return 0;
  
+}
+
+double sum_cos(int u, double s)
+{
+    double sum = 0.0;
+
+    for (int i = 1; i <= u; i++)
+    {
+        sum += cos(pow(s, i));
+    }
+
+    return sum;
 }
 
 ## 3. Результаты работы программы
